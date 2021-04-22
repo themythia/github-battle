@@ -33,9 +33,7 @@ const getStarCount = (repos) => {
   return repos.reduce((count, {stargazers_count}) => count + stargazers_count , 0)
 }
 
-const calculateScore = (followers, repos) => {
-  return (followers * 3) + getStarCount(repos)
-}
+const calculateScore = (followers, repos) => ((followers * 3) + getStarCount(repos))
 
 const getUserData = (player) => {
   return Promise.all([getProfile(player), getRepos(player)])
@@ -49,7 +47,7 @@ const sortPlayers = (players) => {
   return players.sort((a,b) => b.score - a.score)
 }
 
-export function battle(players) {
+ export const battle = (players) => {
   return Promise.all([getUserData(players[0]), getUserData(players[1])])
     .then(results => sortPlayers(results))
 }
