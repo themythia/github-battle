@@ -47,7 +47,7 @@ const sortPlayers = (players) => {
   return players.sort((a,b) => b.score - a.score)
 }
 
- export const battle = (players) => {
+export const battle = (players) => {
   return Promise.all([getUserData(players[0]), getUserData(players[1])])
     .then(results => sortPlayers(results))
 }
