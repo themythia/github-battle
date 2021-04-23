@@ -292,4 +292,28 @@ li {
   margin-top: 20px;
   text-align: center;
 }
+
+.tooltip-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.tooltip {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  width: 160px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -80px;
+  border-radius: 3px;
+  background-color: rgba(51, 51, 51, 0.9);
+  padding: 7px;
+  margin-bottom: 5px;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+}
 /*# sourceMappingURL=index.css.map */

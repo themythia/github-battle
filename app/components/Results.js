@@ -12,40 +12,80 @@ import Card from './Card';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 
-const ProfileList = ({ profile }) => {
-  return (
-    <ul className='card-list'>
-      <li>
-        <FaUser color='rgb(239, 115, 115)' size={22} />
-        {profile.name}
-      </li>
-      {profile.location && (
+class ProfileList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hoveringLocation: false,
+      hoveringCompany: false,
+    };
+    this.mouseOut = this.mouseOut.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
+  }
+
+  mouseOver(id) {
+    this.setState({
+      [id]: true,
+    });
+  }
+  mouseOut(id) {
+    this.setState({
+      [id]: false,
+    });
+  }
+
+  render() {
+    const { profile } = this.props;
+    const { hoveringLocation, hoveringCompany } = this.state;
+
+    return (
+      <ul className='card-list'>
         <li>
-          <FaCompass color='rgb(144, 115, 255)' size={22} />
-          {profile.location}
+          <FaUser color='rgb(239, 115, 115)' size={22} />
+          {profile.name}
         </li>
-      )}
-      {profile.company && (
+        {profile.location && (
+          <li
+            onMouseOver={() => this.mouseOver('hoveringLocation')}
+            onMouseOut={() => this.mouseOut('hoveringLocation')}
+            className='tooltip-container'
+          >
+            {hoveringLocation === true && (
+              <div className='tooltip'>User's Location</div>
+            )}
+            <FaCompass color='rgb(144, 115, 255)' size={22} />
+            {profile.location}
+          </li>
+        )}
+        {profile.company && (
+          <li
+            onMouseOver={() => this.mouseOver('hoveringCompany')}
+            onMouseOut={() => this.mouseOut('hoveringCompany')}
+            className='tooltip-container'
+          >
+            {hoveringCompany === true && (
+              <div className='tooltip'>User's Company</div>
+            )}
+            <FaBriefcase color='#795548' size={22} />
+            {profile.company}
+          </li>
+        )}
         <li>
-          <FaBriefcase color='#795548' size={22} />
-          {profile.company}
+          <FaUsers color='rgb(129, 195, 245)' size={22} />
+          {profile.followers.toLocaleString()} followers
         </li>
-      )}
-      <li>
-        <FaUsers color='rgb(129, 195, 245)' size={22} />
-        {profile.followers.toLocaleString()} followers
-      </li>
-      <li>
-        <FaUserFriends color='rgb(64, 183, 95)' size={22} />
-        {profile.following.toLocaleString()} following
-      </li>
-      <li>
-        <FaCode color='rgb(59, 76, 85)' size={22} />
-        {profile.public_repos.toLocaleString()} public repos
-      </li>
-    </ul>
-  );
-};
+        <li>
+          <FaUserFriends color='rgb(64, 183, 95)' size={22} />
+          {profile.following.toLocaleString()} following
+        </li>
+        <li>
+          <FaCode color='rgb(59, 76, 85)' size={22} />
+          {profile.public_repos.toLocaleString()} public repos
+        </li>
+      </ul>
+    );
+  }
+}
 
 ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
