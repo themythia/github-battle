@@ -1,10 +1,18 @@
-import React from 'react'
-import {battle} from '../utils/api'
-import {FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser} from 'react-icons/fa'
-import Card from './Card'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { battle } from '../utils/api';
+import {
+  FaCompass,
+  FaBriefcase,
+  FaUsers,
+  FaUserFriends,
+  FaCode,
+  FaUser,
+} from 'react-icons/fa';
+import Card from './Card';
+import PropTypes from 'prop-types';
+import Loading from './Loading';
 
-const ProfileList = ({profile}) => {
+const ProfileList = ({ profile }) => {
   return (
     <ul className='card-list'>
       <li>
@@ -21,7 +29,7 @@ const ProfileList = ({profile}) => {
         <li>
           <FaBriefcase color='#795548' size={22} />
           {profile.company}
-        </li>              
+        </li>
       )}
       <li>
         <FaUsers color='rgb(129, 195, 245)' size={22} />
@@ -36,53 +44,50 @@ const ProfileList = ({profile}) => {
         {profile.public_repos.toLocaleString()} public repos
       </li>
     </ul>
-  )
-}
+  );
+};
 
 ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
-
-}
+};
 
 export default class Results extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       winner: null,
       loser: null,
       error: null,
-      loading: true
-    }
+      loading: true,
+    };
   }
-  componentDidMount () {
-    const {playerOne, playerTwo, onReset} = this.props;
+  componentDidMount() {
+    const { playerOne, playerTwo, onReset } = this.props;
     battle([playerOne, playerTwo])
-      .then(players => {
+      .then((players) => {
         this.setState({
           winner: players[0],
           loser: players[1],
           error: null,
-          loading: false
-        })
+          loading: false,
+        });
       })
-      .catch(({message}) => {
+      .catch(({ message }) => {
         this.setState({
           error: message,
-          loading: false
-        })
-      })
+          loading: false,
+        });
+      });
   }
   render() {
-    const {winner, loser, error, loading} = this.state;
-    
+    const { winner, loser, error, loading } = this.state;
+
     if (loading === true) {
-      return <p>LOADING</p>
+      return <Loading text='Battling' />;
     }
 
     if (error) {
-      return (
-        <p className='center-text error'>{error}</p>
-      )
+      return <p className='center-text error'>{error}</p>;
     }
 
     return (
@@ -105,21 +110,18 @@ export default class Results extends React.Component {
             name={loser.profile.login}
           >
             <ProfileList profile={loser.profile} />
-          </Card>        
+          </Card>
         </div>
-        <button
-          onClick={this.props.onReset}
-          className='btn dark-btn btn-space'
-        >
+        <button onClick={this.props.onReset} className='btn dark-btn btn-space'>
           Reset
         </button>
       </React.Fragment>
-    )
+    );
   }
 }
 
 Results.propTypes = {
   playerOne: PropTypes.string.isRequired,
   playerTwo: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired
-}
+  onReset: PropTypes.func.isRequired,
+};

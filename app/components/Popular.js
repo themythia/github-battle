@@ -7,7 +7,8 @@ import {
   FaCodeBranch,
   FaExclamationTriangle,
 } from 'react-icons/fa';
-import Card from './Card'
+import Card from './Card';
+import Loading from './Loading';
 
 const LanguagesNav = ({ selected, onUpdateLanguage }) => {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -73,7 +74,7 @@ const ReposGrid = ({ repos }) => {
                   {open_issues.toLocaleString()} open issues
                 </li>
               </ul>
-            </Card>          
+            </Card>
           </li>
         );
       })}
@@ -141,14 +142,13 @@ export default class Popular extends React.Component {
   }
   render() {
     const { selectedLanguage, repos, error } = this.state;
-    console.log('state', this.state);
     return (
       <React.Fragment>
         <LanguagesNav
           selected={selectedLanguage}
           onUpdateLanguage={this.updateLanguage}
         />
-        {this.isLoading() && <p>LOADING</p>}
+        {this.isLoading() && <Loading text='Fetching Repos' />}
         {error && <p className='center-text error'>{error}</p>}
         {repos[selectedLanguage] && (
           <ReposGrid repos={repos[selectedLanguage]} />
