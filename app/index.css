@@ -214,6 +214,11 @@ li {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
+.player-inputs .input-dark {
+  color: #DADADA;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .player-inputs button {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -250,6 +255,16 @@ li {
 .dark-btn:disabled {
   background-color: #f2f2f2;
   color: #c7c7c7;
+}
+
+.light-btn {
+  color: #000;
+  background-color: #aaa8a8;
+}
+
+.light-btn:disabled {
+  background-color: #292929;
+  color: #4a4a4a;
 }
 
 .players-container {
@@ -321,5 +336,10 @@ li {
   color: #fff;
   text-align: center;
   font-size: 14px;
+}
+
+.bg-dark {
+  background-color: #24282a;
+  border-radius: 3px;
 }
 /*# sourceMappingURL=index.css.map */

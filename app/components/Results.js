@@ -12,6 +12,7 @@ import Card from './Card';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import Tooltip from './Tooltip';
+import { ThemeConsumer } from '../contexts/theme';
 
 const ProfileList = ({ profile }) => {
   return (
@@ -119,9 +120,18 @@ export default class Results extends React.Component {
             <ProfileList profile={loser.profile} />
           </Card>
         </div>
-        <button onClick={this.props.onReset} className='btn dark-btn btn-space'>
-          Reset
-        </button>
+        <ThemeConsumer>
+          {({ theme }) => (
+            <button
+              onClick={this.props.onReset}
+              className={`btn btn-space ${
+                theme === 'dark' ? 'light-btn' : 'dark-btn'
+              }`}
+            >
+              Reset
+            </button>
+          )}
+        </ThemeConsumer>
       </React.Fragment>
     );
   }
