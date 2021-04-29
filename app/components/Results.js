@@ -16,10 +16,12 @@ import Tooltip from './Tooltip';
 const ProfileList = ({ profile }) => {
   return (
     <ul className='card-list'>
-      <li>
-        <FaUser color='rgb(239, 115, 115)' size={22} />
-        {profile.name}
-      </li>
+      {profile.name && (
+        <li>
+          <FaUser color='rgb(239, 115, 115)' size={22} />
+          {profile.name}
+        </li>
+      )}
       {profile.location && (
         <li>
           <Tooltip text="User's Location">
