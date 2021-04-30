@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import Tooltip from './Tooltip';
 import { ThemeConsumer } from '../contexts/theme';
+import queryString from 'query-string';
+import { Link } from 'react-router-dom';
 
 const ProfileList = ({ profile }) => {
   return (
@@ -70,7 +72,9 @@ export default class Results extends React.Component {
     };
   }
   componentDidMount() {
-    const { playerOne, playerTwo, onReset } = this.props;
+    const { playerOne, playerTwo } = queryString.parse(
+      this.props.location.search
+    );
     battle([playerOne, playerTwo])
       .then((players) => {
         this.setState({
@@ -122,23 +126,17 @@ export default class Results extends React.Component {
         </div>
         <ThemeConsumer>
           {({ theme }) => (
-            <button
-              onClick={this.props.onReset}
+            <Link
+              to='/battle'
               className={`btn btn-space ${
                 theme === 'dark' ? 'light-btn' : 'dark-btn'
               }`}
             >
               Reset
-            </button>
+            </Link>
           )}
         </ThemeConsumer>
       </React.Fragment>
     );
   }
 }
-
-Results.propTypes = {
-  playerOne: PropTypes.string.isRequired,
-  playerTwo: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
-};
