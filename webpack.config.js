@@ -6,6 +6,7 @@ module.exports = {
   output: {
     filename: 'index_bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -19,4 +20,7 @@ module.exports = {
       template: 'app/index.html',
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+  },
 };

@@ -52,6 +52,10 @@ li {
   color: inherit;
 }
 
+.nav li {
+  margin-right: 10px;
+}
+
 .grid {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -63,6 +67,12 @@ li {
 .space-around {
   -ms-flex-pack: distribute;
       justify-content: space-around;
+}
+
+.space-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .header-lg {
