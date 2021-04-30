@@ -88,32 +88,28 @@ ReposGrid.propTypes = {
   repos: PropTypes.array.isRequired,
 };
 export default class Popular extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedLanguage: 'All',
-      repos: {},
-      error: null,
-    };
-    /* 
-      state = {
-        selectedLanguage: 'languageName',
-        repos: {
-          'All': []
-          'languageName1': [{},{},{}],
-          'languageName2': [{},{},{}],
-          'languageName3': [{},{},{}]
-        }
-        error: null
+  state = {
+    selectedLanguage: 'All',
+    repos: {},
+    error: null,
+  };
+  /* 
+    state = {
+      selectedLanguage: 'languageName',
+      repos: {
+        'All': []
+        'languageName1': [{},{},{}],
+        'languageName2': [{},{},{}],
+        'languageName3': [{},{},{}]
       }
-    */
-    this.updateLanguage = this.updateLanguage.bind(this);
-    this.isLoading = this.isLoading.bind(this);
-  }
+      error: null
+    }
+  */
+
   componentDidMount() {
     this.updateLanguage(this.state.selectedLanguage);
   }
-  updateLanguage(selectedLanguage) {
+  updateLanguage = (selectedLanguage) => {
     this.setState({
       selectedLanguage,
       error: null,
@@ -136,13 +132,13 @@ export default class Popular extends React.Component {
           });
         });
     }
-  }
+  };
   //if repos[selectedLanguage] is empty (falsy) and error state is null,
   //              we consider it still loading
-  isLoading() {
+  isLoading = () => {
     const { selectedLanguage, repos, error } = this.state;
     return !repos[selectedLanguage] && error === null;
-  }
+  };
   render() {
     const { selectedLanguage, repos, error } = this.state;
     return (

@@ -49,24 +49,12 @@ const Instructions = () => {
 };
 
 class PlayerInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit(event) {
+  state = { username: '' };
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state.username);
-  }
-  handleChange(event) {
-    this.setState({
-      username: event.target.value,
-    });
-  }
+  };
+  handleChange = (event) => this.setState({ username: event.target.value });
   render() {
     return (
       <ThemeConsumer>
@@ -139,27 +127,12 @@ PlayerPreview.propTypes = {
 };
 
 export default class Battle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playerOne: null,
-      playerTwo: null,
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-  }
-
-  handleSubmit(id, player) {
-    this.setState({
-      [id]: player,
-    });
-  }
-  handleReset(id) {
-    this.setState({
-      [id]: null,
-    });
-  }
-
+  state = {
+    playerOne: null,
+    playerTwo: null,
+  };
+  handleSubmit = (id, player) => this.setState({ [id]: player });
+  handleReset = (id) => this.setState({ [id]: null });
   render() {
     const { playerOne, playerTwo } = this.state;
 
