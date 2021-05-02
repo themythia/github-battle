@@ -14,7 +14,7 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
     ],
   },
-  mode: 'production',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   plugins: [
     new HtmlWebPackPlugin({
       template: 'app/index.html',
