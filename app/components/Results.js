@@ -123,7 +123,7 @@ export default class Results extends React.Component {
           </Card>
         </div>
         <ThemeConsumer>
-          {({ theme }) => (
+          {(theme) => (
             <Link
               to='/battle'
               className={`btn btn-space ${

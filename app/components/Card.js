@@ -5,7 +5,7 @@ import { ThemeConsumer } from '../contexts/theme';
 const Card = ({ header, subheader, avatar, href, name, children }) => {
   return (
     <ThemeConsumer>
-      {({ theme }) => (
+      {(theme) => (
         <div className={`card bg-${theme}`}>
           <h4 className='header-lg center-text'>{header}</h4>
           <img className='avatar' src={avatar} alt={`Avatar for ${name}`} />
